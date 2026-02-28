@@ -90,11 +90,6 @@ def build_processed_dataset(src_root, dst_root, model_type):
     print(f"  Dataset ready! data.yaml saved at: {yaml_path}")
     return yaml_path
 
-
-# Need cv2 for imwrite in build_processed_dataset
-
-
-
 def train_detection(args, device):
     """
     Main YOLO detection training pipeline.

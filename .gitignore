@@ -10,6 +10,8 @@ env
 Rip-Current-Monitoring-1/
 saved_models/
 runs/
+preprocessed_datasets/
+yolov8n.pt
 
 # Ignore Python virtual environments
 venv/

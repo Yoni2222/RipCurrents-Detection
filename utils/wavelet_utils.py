@@ -2,7 +2,7 @@ import pywt
 import cv2
 import numpy as np
 
-def compute_wavelet_transform(image, wavelet='db4', level=2):
+def compute_wavelet_transform(image, wavelet='db2', level=2):
     if len(image.shape) == 3:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     else:

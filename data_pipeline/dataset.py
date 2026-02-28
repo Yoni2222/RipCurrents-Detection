@@ -178,43 +178,6 @@ class ChannelReplacementDataset(Dataset):
 
         return img_tensor, torch.tensor(label, dtype=torch.float32)
 
-    """
-        def __getitem__(self, idx):
-        path = str(self.images[idx])
-        filename = self.images[idx].name
-        label = self.labels[idx]
-
-        # 1. טעינה (רזולוציה מלאה)
-        bgr = cv2.imread(path)
-        if bgr is None: bgr = np.zeros((640, 640, 3), dtype=np.uint8)
-
-        # 2. חיתוך החול (CROP) - על רזולוציה מלאה!
-        h, w, _ = bgr.shape
-        crop_h = int(h * 0.8)
-        bgr = bgr[0:crop_h, 0:w]
-
-        # 3. חישוב וייבלט (על מים ברזולוציה גבוהה)
-        wavelet_channel = compute_wavelet_transform(bgr)
-
-        # 4. הקטנת ה-RGB (Resize)
-        bgr = cv2.resize(bgr, (320, 320))
-
-        # 5. פירוק ומיזוג
-        b, g, r = cv2.split(bgr)
-        hybrid_img = cv2.merge([wavelet_channel, g, b])
-
-        # 6. המרה ל-PIL והפעלת הטרנספורמים (היפוך + טנסור)
-        img_pil = Image.fromarray(hybrid_img)
-
-        if self.transform:
-            img_tensor = self.transform(img_pil)
-        else:
-            img_tensor = transforms.ToTensor()(img_pil)
-
-        return img_tensor, torch.tensor(label, dtype=torch.float32), filename
-    """
-
-
 
 class DualStreamDataset(Dataset):
     def __init__(self, root_dir, split='train', transform=None):

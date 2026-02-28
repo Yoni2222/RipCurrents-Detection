@@ -8,14 +8,10 @@ from utils.metrics import calculate_full_metrics, find_optimal_threshold_by_acc
 
 
 def get_predictions(model, loader, device, model_type):
-
-
     dual_stream_models = ['dual_stream_4_3', 'dual_stream_4_2', 'dual_stream_3_2', 'dual_stream_3_3']
-
     model.eval()
     all_probs = []
     all_labels = []
-
 
     with torch.no_grad():
         for batch_data in loader:
@@ -96,30 +92,11 @@ def test_classification(args, device):
     val_probs, val_labels = get_predictions(model, val_loader, device, args.model_type)
     test_probs, test_labels = get_predictions(model, test_loader, device, args.model_type)
 
-    val_best_thresh, val_best_acc = find_optimal_threshold_by_acc(val_probs, val_labels)
-    oracle_thresh, oracle_test_acc = find_optimal_threshold_by_acc(test_probs, test_labels)
-
-    acc_val_th, prec_val_th, rec_val_th, f1_val_th = calculate_full_metrics(test_probs, test_labels, val_best_thresh)
     acc_50, prec_50, rec_50, f1_50 = calculate_full_metrics(test_probs, test_labels, 0.5)
-    acc_55, prec_55, rec_55, f1_55 = calculate_full_metrics(test_probs, test_labels, 0.55)
 
-    print(f"\n SEED {args.seed} RESULTS FOR {args.model_type.upper()}:")
-    print(f"   Val Best Thresh:      {val_best_thresh:.2f} (Val Acc: {val_best_acc:.2%})")
-    print(f"   Real Test Acc:        {acc_val_th:.2%}")
-    print(f"   Real Test F1:         {f1_val_th:.2%}")
-    print(f"   Real Test Precision:  {prec_val_th:.2%}")
-    print(f"   Real Test Recall:     {rec_val_th:.2%}")
-
+    print(f"\n RESULTS FOR {args.model_type.upper()}:")
     print(f"\n   Threshold = 0.5:")
     print(f"   Real Test Acc:        {acc_50:.2%}")
     print(f"   Real Test F1:         {f1_50:.2%}")
     print(f"   Real Test Precision:  {prec_50:.2%}")
     print(f"   Real Test Recall:     {rec_50:.2%}")
-
-    print(f"\n   Threshold = 0.55:")
-    print(f"   Real Test Acc:        {acc_55:.2%}")
-    print(f"   Real Test F1:         {f1_55:.2%}")
-    print(f"   Real Test Precision:  {prec_55:.2%}")
-    print(f"   Real Test Recall:     {rec_55:.2%}")
-
-    print(f"\n  Oracle Test Acc:       {oracle_test_acc:.2%} (Max Potential at Thresh {oracle_thresh:.2f})")
