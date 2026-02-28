@@ -10,3 +10,7 @@ env
 Rip-Current-Monitoring-1/
 saved_models/
 runs/
+
+# Ignore Python virtual environments
+venv/
+.venv/
