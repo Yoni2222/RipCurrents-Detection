@@ -33,9 +33,6 @@ Example: Train YOLO with HSV + Wavelet transformed images:
 (Note: The system will automatically generate a dedicated dataset folder named dataset_yolo_hsv_wavelet from the raw source directory).
 "python main.py --action train --task detection --model_type yolo_hsv_wavelet"
 
-Example: Test YOLO + SAM Hybrid approach:
-(Note: During the first run, the SAM model weights - approx. 2.4GB - will be downloaded automatically).
-"python main.py --action test --task detection --model_type yolo_hsv_wavelet --weights_path path_to_yolo_weights.pth"
 
 Upon completing the test phase for detection models, a Visual_Evidence folder will be generated alongside the weights. This folder contains images displaying the YOLO bounding box (Red), the refined SAM bounding box/mask (Cyan), and the Ground Truth (Green).
 
