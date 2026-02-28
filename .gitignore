@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+best_model.pth
+rip_current_binary_dataset/
+
+# Added per user request
+env
+Rip-Current-Monitoring-1/
+saved_models/
+runs/

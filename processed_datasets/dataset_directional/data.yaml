@@ -1,0 +1,7 @@
+names:
+- rip_current
+nc: 1
+path: C:\Users\yonib\PycharmProjects\RipCurrentsDetection\processed_datasets\dataset_directional
+test: test/images
+train: train/images
+val: valid/images
